@@ -1,0 +1,4 @@
+{
+  "READWISE_ACCESS_TOKEN": "<insertyourtoken>",
+  "LOCAL_FOLDER": "<full url for the folder you want the notes in>"
+}
