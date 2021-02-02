@@ -1,4 +1,4 @@
-interface ISource {
+export interface ISource {
   id: string;
   title: string;
   author: string;
@@ -11,29 +11,35 @@ interface ISource {
   source_url: string;
 }
 
-interface IAllSources {
+export interface IAllSources {
   count: number;
   next: string;
   previous: string;
   results: ISource[];
 }
 
-interface IHighlight {
-  "id": string;
-  "text": string;
-  "note": string;
-  "location": number;
-  "location_type": string;
-  "highlighted_at": string;
-  "url": string;
-  "color": string;
-  "updated": string;
-  "book_id": string;
+export interface IHighlight {
+  id: string;
+  text: string;
+  note: string;
+  location: number;
+  location_type: string;
+  highlighted_at: string;
+  url: string;
+  color: string;
+  updated: string;
+  book_id: string;
 }
 
-interface IAllHighlights {
-  "count": number;
-  "next": string;
-  "previous": string;
+export interface IAllHighlights {
+  count: number;
+  next: string;
+  previous: string;
   results: IHighlight[];
-  }
+}
+
+export interface ConfigOptions {
+  readwise_access_token: string;
+  destination_dir: string;
+  last_update: string;
+}
