@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "readwisesync", "readwisesync.mdproj", "{0B246D9A-C1A2-4884-BA13-A1970E032530}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A2EB354-E088-4104-A5B4-A3B5227B6199}"
+	ProjectSection(SolutionItems) = preProject
+		com.technovangelist.readwisesync.plist = com.technovangelist.readwisesync.plist
+		readwise.ts = readwise.ts
+		filetools.ts = filetools.ts
+		types.ts = types.ts
+		utils.ts = utils.ts
+		LICENSE = LICENSE
+		README.md = README.md
+		config.json = config.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B246D9A-C1A2-4884-BA13-A1970E032530}.Default|Any CPU.ActiveCfg = Default|Any CPU
+		{0B246D9A-C1A2-4884-BA13-A1970E032530}.Default|Any CPU.Build.0 = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F865BA29-4603-449C-8013-83F9AA248DE3}
+	EndGlobalSection
+EndGlobal

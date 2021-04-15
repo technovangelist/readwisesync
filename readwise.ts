@@ -10,6 +10,7 @@ import {
   setConfig,
   writeDestinationFile,
   getLocalMetadata,
+  getLocalExtras,
   getDestinationFileName,
   getDestinationFileContent,
 } from "./filetools.ts";
@@ -22,6 +23,24 @@ import {
 
 const config: ConfigOptions = await getConfig();
 
+const entityMap = new Map<string, string>(
+  Object.entries({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+    "/": "&#x2F;",
+  })
+);
+
+export function escape_html(source: string) {
+  return String(source).replace(/[&<>"'\/]/g, (s: string) => entityMap.get(s)!);
+}
+
+function sortHighlights(a: IHighlight, b: IHighlight) {
+  return a.location - b.location;
+}
 // const config = JSON.parse(
 //   await Deno.readTextFile("/Users/matt.williams/readwiseconfig.json")
 // );
@@ -116,22 +135,21 @@ await fetch(
           : "";
         const sourceurltext = source_url ? `SourceUrl: ${source_url}\n` : "";
 
-        let mdoutput = `${titletext}${authortext}${categorytext}${updatedtext}${coverurltext}${highlightsurltext}${sourceurltext}${getLocalMetadata(
+        let mdoutput = `${titletext}## Source:\n${authortext}${categorytext}${updatedtext}${coverurltext}${highlightsurltext}${sourceurltext}\n${getLocalExtras(
           localfilecontents,
           `${bookId}top`
-        )}\n\nHighlights:\n\n`;
+        )}\n \n-----\n ## Highlights:\n\n`;
 
-        allHighlights.results.map((result: IHighlight) => {
+        allHighlights.results.sort(sortHighlights).map((result: IHighlight) => {
           // const localfilecontents = await get
           const highlightedtext =
             result.text && result.text != "AirrQuote"
-              ? `==${result.text.replace(
-                  /\b\W*\n\W\n*\W*\n*\W*\n*\W*\b/gm,
-                  "\n"
-                )}== ^rw${result.id}hl\n\n`
+              ? `>${escape_html(
+                  result.text.replace(/\b\W*\n\W\n*\W*\n*\W*\n*\W*\b/gm, "\n>")
+                )} ^rw${result.id}hl\n\n`
               : "";
           const notetext = result.note
-            ? `Comment: ${result.note} ^rw${result.id}comment\n`
+            ? `Comment: ${escape_html(result.note)} ^rw${result.id}comment\n`
             : "";
           const highlightedattext = result.highlighted_at
             ? `\nHighlighted: ${readwisedateparse(result.highlighted_at)}\n`
@@ -140,14 +158,24 @@ await fetch(
             result.highlighted_at != result.updated
               ? `Updated: ${readwisedateparse(result.updated)}\n`
               : ``;
+
+          let highlighttitle =
+            result.text.length >= 60
+              ? `${result.text.substring(0, 60)}...`
+              : `${result.text.substring(0, result.text.length)}`;
+          highlighttitle = highlighttitle.replace(
+            /\b\W*\n\W\n*\W*\n*\W*\n*\W*\b/gm,
+            " "
+          );
           const highlighturltext = result.url ? `${result.url}\n` : "";
           if (`${highlightedtext}${notetext}`.length > 1) {
-            mdoutput += `${highlightedtext}${notetext}${getLocalMetadata(
+            mdoutput += `### ${highlighttitle}\n${highlightedtext}${notetext}${highlightedattext}${highlightupdatededattext}${highlighturltext}\n${getLocalExtras(
               localfilecontents,
               result.id
-            )}${highlightedattext}${highlightupdatededattext}${highlighturltext}\n------\n\n`;
+            )}\n\n------\n\n`;
           }
         });
+
         await writeDestinationFile(
           book_title,
           config.destination_dir,

@@ -25,6 +25,28 @@ export function getLocalMetadata(
   return outputstring;
 }
 
+export function getLocalExtras(
+  localfilecontents: string,
+  locationcode: string
+) {
+  // console.log(localfilecontents);
+  const startstring = `%%${locationcode}start%%\n#### Extras:\n`;
+  const endstring = `\n%%${locationcode}end%%`;
+
+  let startindex = -1,
+    endindex = -1;
+  let outputstring = `${startstring}${endstring}\n\n`;
+  // console.log(startstring);
+  startindex = localfilecontents.indexOf(startstring);
+  if (startindex > 0) {
+    // console.log(start);
+    endindex = localfilecontents.indexOf(endstring) + endstring.length;
+    // console.log(end);
+    outputstring = localfilecontents.substring(startindex, endindex);
+  }
+
+  return outputstring;
+}
 export async function getConfig(): Promise<ConfigOptions> {
   // const configFile = "/Users/matt.williams/readwiseconfig.json";
 

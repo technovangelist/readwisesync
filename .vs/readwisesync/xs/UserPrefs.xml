@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{0B246D9A-C1A2-4884-BA13-A1970E032530}|Default">
+  <MonoDevelop.Ide.ItemProperties.readwisesync FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="readwise.ts">
+    <Files>
+      <File FileName="config.json" Line="1" Column="1" />
+      <File FileName="filetools.ts" Line="95" Column="26" />
+      <File FileName="types.ts" Line="1" Column="1" />
+      <File FileName="utils.ts" Line="1" Column="1" />
+      <File FileName="readwise.ts" Line="130" Column="8" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="readwisesync" expanded="True">
+            <Node name="Solution Items" expanded="True">
+              <Node name="/Users/matt.williams/projects/technovangelist/readwisesync/readwise.ts" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
